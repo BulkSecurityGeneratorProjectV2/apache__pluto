@@ -19,6 +19,7 @@ package org.apache.pluto.util.assemble.ear;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -56,7 +57,7 @@ public class EarAssemblerTest extends ArchiveBasedAssemblyTest {
     public void testEarAssemblyToTempDir() throws Exception {
         AssemblerConfig config = new AssemblerConfig();
         config.setSource( earFile );
-        File assembledEar = File.createTempFile( earFile.getName(), ".ear" ); 
+        File assembledEar = Files.createTempFile(earFile.getName(), ".ear").toFile(); 
         config.setDestination( assembledEar );
         EarAssembler assembler = new EarAssembler();
         assembler.assemble( config );
@@ -67,7 +68,7 @@ public class EarAssemblerTest extends ArchiveBasedAssemblyTest {
     public void testEarAssemblyInPlace() throws Exception {
         // copy the test ear file to a temp directory, so we don't overwrite the
         // test ear file distributed with Pluto.
-        File inplaceEarFile = File.createTempFile( earFile.getName(), ".ear" );
+        File inplaceEarFile = Files.createTempFile(earFile.getName(), ".ear").toFile();
         FileUtils.copyFile( earFile, inplaceEarFile );
         
         AssemblerConfig config = new AssemblerConfig();

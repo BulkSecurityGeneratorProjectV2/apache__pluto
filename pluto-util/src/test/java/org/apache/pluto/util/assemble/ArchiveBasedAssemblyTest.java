@@ -17,6 +17,7 @@
 package org.apache.pluto.util.assemble;
 
 import java.io.File;
+import java.nio.file.Files;
 
 import junit.framework.TestCase;
 
@@ -53,7 +54,7 @@ public abstract class ArchiveBasedAssemblyTest extends TestCase {
     public void testAssembleToNonExistantFile() throws Exception {
         File fileToAssemble = getFileToAssemble();
         Assembler underTest = getAssemblerUnderTest();        
-        File destFile = File.createTempFile( "jarAssemblyTest", ".tmp" );
+        File destFile = Files.createTempFile("jarAssemblyTest", ".tmp").toFile();
         destFile.delete();
 
         assertFalse( "Destination file [" + destFile.getAbsolutePath() + "] already exists.", 
@@ -80,7 +81,7 @@ public abstract class ArchiveBasedAssemblyTest extends TestCase {
         File fileToAssemble = getFileToAssemble();
         Assembler underTest = getAssemblerUnderTest();
         
-        File tmpFile = File.createTempFile( "jarAssemblyTest", ".tmp" );
+        File tmpFile = Files.createTempFile("jarAssemblyTest", ".tmp").toFile();
         File destDir = new File( tmpFile.getParent(), tmpFile.getName() + ".dir" );
         destDir.mkdir();
         
@@ -109,7 +110,7 @@ public abstract class ArchiveBasedAssemblyTest extends TestCase {
         File fileToAssemble = getFileToAssemble();
         Assembler underTest = getAssemblerUnderTest();
         
-        File destFile = File.createTempFile( "jarAssemblyTest", ".tmp" );
+        File destFile = Files.createTempFile("jarAssemblyTest", ".tmp").toFile();
         
         assertTrue( "Destination file [" + destFile.getAbsolutePath() + "] should already exist.", 
                 destFile.exists() );
@@ -130,7 +131,7 @@ public abstract class ArchiveBasedAssemblyTest extends TestCase {
         File fileToAssemble = getFileToAssemble();
         Assembler underTest = getAssemblerUnderTest();
         
-        File tmpFile = File.createTempFile( "jarAssemblyTest", ".tmp" );
+        File tmpFile = Files.createTempFile("jarAssemblyTest", ".tmp").toFile();
         File destDir = new File( tmpFile.getName() + ".dir" );
         destDir.mkdirs();
         File destFile = new File( destDir, fileToAssemble.getName() );

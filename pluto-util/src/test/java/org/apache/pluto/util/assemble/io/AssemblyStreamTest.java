@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
@@ -64,7 +65,7 @@ public class AssemblyStreamTest extends TestCase {
     }
     
     public void testJarStreamingAssembly() throws Exception {
-        File warFileOut = File.createTempFile( "streamingAssemblyWarTest", ".war" );
+        File warFileOut = Files.createTempFile("streamingAssemblyWarTest", ".war").toFile();
         JarInputStream jarIn = new JarInputStream( warIn );
         JarOutputStream warOut = new JarOutputStream( new FileOutputStream( warFileOut ) );
         jarAssemblerUnderTest.assembleStream( jarIn, warOut, Assembler.DISPATCH_SERVLET_CLASS );
@@ -74,7 +75,7 @@ public class AssemblyStreamTest extends TestCase {
     }
     
     public void testWebXmlStreamingAssembly() throws Exception {
-        File assembledWebXml = File.createTempFile( "streamingWebXmlTest", ".xml" );
+        File assembledWebXml = Files.createTempFile("streamingWebXmlTest", ".xml").toFile();
         OutputStream assembledWebXmlOut = new FileOutputStream( assembledWebXml );
         webXmlAssemblerUnderTest.assembleStream(webXmlIn, portletXmlIn, assembledWebXmlOut, Assembler.DISPATCH_SERVLET_CLASS);
         verifyAssembly( new FileInputStream( assembledWebXml ), 

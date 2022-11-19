@@ -19,6 +19,7 @@ package org.apache.pluto.util.assemble.file;
 import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.pluto.util.assemble.AssemblerConfig;
@@ -58,7 +59,7 @@ public class FileAssemblerTest extends XMLTestCase {
     public void testAssembleToNewDirectory() throws Exception {
         AssemblerConfig config = new AssemblerConfig();
 
-        final File webXmlFileDest = File.createTempFile(this.webXmlFile.getName() + ".", ".xml");
+        final File webXmlFileDest = Files.createTempFile(this.webXmlFile.getName() + ".", ".xml").toFile();
         webXmlFileDest.deleteOnExit();
 
         config.setWebappDescriptor(this.webXmlFile);
@@ -74,7 +75,7 @@ public class FileAssemblerTest extends XMLTestCase {
     public void testAssembleOverSelf() throws Exception {
         AssemblerConfig config = new AssemblerConfig();
 
-        final File webXmlFileCopy = File.createTempFile(this.webXmlFile.getName() + ".", ".source.xml");
+        final File webXmlFileCopy = Files.createTempFile(this.webXmlFile.getName() + ".", ".source.xml").toFile();
         webXmlFileCopy.deleteOnExit();
 
         FileUtils.copyFile(this.webXmlFile, webXmlFileCopy);

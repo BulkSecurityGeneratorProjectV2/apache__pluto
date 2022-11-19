@@ -19,6 +19,7 @@ package org.apache.pluto.util.assemble.war;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.pluto.util.assemble.ArchiveBasedAssemblyTest;
@@ -62,7 +63,7 @@ public class WarAssemblerTest extends ArchiveBasedAssemblyTest {
     public void testAssembleOverSelf() throws Exception {
         AssemblerConfig config = new AssemblerConfig();
 
-        final File portletCopy = File.createTempFile(this.portletFile.getName() + ".", ".war");
+        final File portletCopy = Files.createTempFile(this.portletFile.getName() + ".", ".war").toFile();
         portletCopy.deleteOnExit();
         FileUtils.copyFile(this.portletFile, portletCopy);
 
@@ -90,7 +91,7 @@ public class WarAssemblerTest extends ArchiveBasedAssemblyTest {
     }
 
     private File getTempDir() throws IOException {
-        final File tempFile = File.createTempFile("DoesNotMatter", ".tmp");
+        final File tempFile = Files.createTempFile("DoesNotMatter", ".tmp").toFile();
         tempFile.delete();
         final File tempDir = tempFile.getParentFile();
         return tempDir;

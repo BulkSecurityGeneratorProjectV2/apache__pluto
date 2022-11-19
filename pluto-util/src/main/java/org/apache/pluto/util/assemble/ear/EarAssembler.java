@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
@@ -122,7 +123,7 @@ public class EarAssembler extends AbstractArchiveAssembler {
      * @throws IOException
      */
     protected AssemblySink getAssemblySink( AssemblerConfig config, JarEntry entry ) throws IOException {
-        File f = File.createTempFile( "earAssemblySink", "tmp" );
+        File f = Files.createTempFile("earAssemblySink", "tmp").toFile();
         f.deleteOnExit();
         return getFileAssemblySink( entry, f );
     }

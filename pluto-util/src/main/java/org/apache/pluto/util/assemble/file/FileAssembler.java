@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.pluto.util.UtilityException;
@@ -55,7 +56,7 @@ public class FileAssembler extends WebXmlRewritingAssembler {
 
             final File destinationDescriptor = config.getDestination();
             if (webappDescriptor.equals(destinationDescriptor)) {
-                final File tempXml = File.createTempFile(webappDescriptor.getName() + ".", ".tmp");
+                final File tempXml = Files.createTempFile(webappDescriptor.getName() + ".", ".tmp").toFile();
                 final FileOutputStream webXmlOut = new FileOutputStream(tempXml);
 
                 this.updateWebappDescriptor(webXmlIn, portletXmlIn, webXmlOut, config.getDispatchServletClass());

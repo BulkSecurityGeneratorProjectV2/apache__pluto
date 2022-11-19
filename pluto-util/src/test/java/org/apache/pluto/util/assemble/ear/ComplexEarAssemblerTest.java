@@ -19,6 +19,7 @@ package org.apache.pluto.util.assemble.ear;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -63,7 +64,7 @@ public class ComplexEarAssemblerTest extends ArchiveBasedAssemblyTest {
     }
     
     public void testMultipleWarFileAssembly() throws Exception {
-        File tmpFile = File.createTempFile( "earTest", "tmp" );
+        File tmpFile = Files.createTempFile("earTest", "tmp").toFile();
         File destDir = new File( tmpFile.getName() + ".dir" );
         destDir.mkdirs();
         
